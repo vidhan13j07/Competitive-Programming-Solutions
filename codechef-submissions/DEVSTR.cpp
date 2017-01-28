@@ -1,0 +1,93 @@
+#include<iostream>
+    #include<bits/stdc++.h>
+    using namespace std;
+    int main()
+    {
+    	int t,ans,c,i,n,k,ans1,ans2;
+    	cin>>t;
+    	while(t--)
+    	{
+    		cin>>n>>k;
+    		char st[n+1];
+    		scanf("%s",st);
+    		ans=0;i=1;c=1;
+    		if(k>=2)
+    		{
+    			while(i<n-1)
+    			{
+    				if(st[i]==st[i-1])
+    				{
+    					c++;
+    					if(c>k)
+    					{
+    						ans+=1;
+    						if(st[i]=='0')
+    						{
+    							if(st[i+1]=='1')
+    								st[i-1]='1';
+    							else
+    								st[i]='1';
+    						}
+    						else
+    						{
+    							if(st[i+1]=='0')
+    								st[i-1]='0';
+    							else
+    								st[i]='0';
+    						}
+    						c=1;
+    					}
+    				}
+    				else
+    					c=1;
+    				//cout<<st<<" "<<c<<" "<<i<<" "<<k<<" "<<ans<<"\n";
+    				i++;
+    			}
+    			if(st[i]==st[i-1] && c==k)
+    			{
+    				ans+=1;
+    				if(st[i]=='0')
+    					st[i]='1';
+    				else
+    					st[i]='0';
+    			}
+    		}
+    		else
+    		{
+    			char st1[n+1],st2[n+1];
+    			for(i=0;i<n;i++)
+    				if(i%2==0)
+    				{
+    					st1[i]='0';
+    					st2[i]='1';
+    				}
+    				else
+    				{
+    					st1[i]='1';
+    					st2[i]='0';
+    				}
+    			ans1=0;ans2=0;
+    			for(i=0;i<n;i++)
+    			{
+    				if(st[i]!=st1[i])
+    					ans1+=1;
+    				else
+    					ans2+=1;
+    			}
+    			if(ans2<ans1)
+    			{
+    				ans=ans2;
+    				for(i=0;i<n;i++)
+    					st[i]=st2[i];
+    			}
+    			else
+    			{
+    				ans=ans1;
+    				for(i=0;i<n;i++)
+    					st[i]=st1[i];
+    			}
+    		}
+    		cout<<ans<<"\n"<<st<<"\n";
+    	}
+    	return 0;
+    }
